@@ -1,5 +1,9 @@
 defmodule NodeStub do
-  def list() do
-    [:"app1@127.0.0.1", :"session_store@127.0.0.2", :"session_store@127.0.0.3"]
+  def get_node("session_store") do
+    {:ok, :"session_store@127.0.0.2"}
+  end
+
+  def get_node("non_existant") do
+    {:error, :no_alive_node}
   end
 end

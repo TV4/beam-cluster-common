@@ -3,13 +3,10 @@ defmodule NodePickerTest do
   doctest NodePicker
 
   test "get one node" do
-    assert NodePicker.get_node("session_store", NodeStub) in [
-             :"session_store@127.0.0.2",
-             :"session_store@127.0.0.3"
-           ]
+    assert NodePicker.get_node("session_store", NodeStub) == {:ok, :"session_store@127.0.0.2"}
   end
 
   test "fetching non existant node" do
-    refute NodePicker.get_node("non_existant", NodeStub)
+    assert NodePicker.get_node("non_existant", NodeStub) == {:error, :no_alive_node}
   end
 end
