@@ -2,7 +2,7 @@ defmodule NodePicker do
   @spec get_node(
           application_name :: String.t(),
           node_lib :: BeamClusterCommon.NodeState | NodeStub
-        ) :: {:ok, atom()} | {:error, :no_alive_node}
+        ) :: atom() | {:error, :no_alive_node}
   def get_node(application_name, node_lib \\ BeamClusterCommon.NodeState) do
     # node_lib.list()
     # |> Enum.reduce([], fn node, acc ->

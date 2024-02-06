@@ -29,7 +29,6 @@ defmodule BeamClusterCommon.NodeState do
     result =
       state
       |> Map.get(service, [])
-      |> Enum.shuffle()
       |> pick_and_validate_random_node()
 
     {:reply, result, state}
@@ -55,12 +54,22 @@ defmodule BeamClusterCommon.NodeState do
     service
   end
 
-  defp pick_and_validate_random_node([]), do: {:error, :no_alive_node}
+  defp pick_and_validate_random_node(nodes) do
+    Enum.shuffle(nodes)
+    |> pick_node()
+  end
 
-  defp pick_and_validate_random_node([node | rest]) do
+  defp pick_node([]), do: {:error, :no_alive_node}
+
+  defp pick_node([node | rest]) do
     case :net_adm.ping(node) do
-      :pong -> {:ok, node}
-      :pang -> pick_and_validate_random_node(rest)
+      :pong ->
+        node
+
+      :pang ->
+        # deregister node if ping is unsuccessful
+        send(self(), {:nodedown, node})
+        pick_and_validate_random_node(rest)
     end
   end
 end
