@@ -4,10 +4,10 @@ defmodule Behaviours.User do
   """
 
   # User operations calls
-  @callback create_user(user_params :: Types.User.user_input_params()) ::
+  @callback create_user(user_params :: Structs.User.parsed_input_user_params()) ::
               {:ok, Types.User.user()} | {:error, Ecto.Changeset.t()}
 
-  @callback update_user(uid :: String.t(), user_params :: Types.User.user_input_params()) ::
+  @callback update_user(uid :: String.t(), user_params :: Structs.User.parsed_input_user_params()) ::
               {:ok, Types.User.user()} | {:error, Ecto.Changeset.t()}
 
   @callback delete_user(uid :: String.t(), country_code :: :SWE | :FIN) ::
