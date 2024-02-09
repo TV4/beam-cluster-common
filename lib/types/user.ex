@@ -3,6 +3,8 @@ defmodule Types.User do
   Typespec for user schema from user DB
   """
   @type user :: %{
+          __struct__: atom(),
+          __meta__: Ecto.Schema.Metadata.t(),
           id: integer(),
           email: String.t(),
           username: String.t(),
@@ -22,6 +24,8 @@ defmodule Types.User do
         }
 
   @type authentication :: %{
+          __struct__: atom(),
+          __meta__: Ecto.Schema.Metadata.t(),
           id: integer(),
           password: String.t(),
           legacy_password: String.t() | nil,
@@ -32,6 +36,8 @@ defmodule Types.User do
         }
 
   @type configuration :: %{
+          __struct__: atom(),
+          __meta__: Ecto.Schema.Metadata.t(),
           id: integer(),
           portability: boolean(),
           generic_ads: boolean(),
@@ -45,12 +51,15 @@ defmodule Types.User do
         }
 
   @type additional_data :: %{
+          __struct__: atom(),
           application: String.t(),
           claims: String.t(),
           value: any()
         }
 
   @type segmentation :: %{
+          __struct__: atom(),
+          __meta__: Ecto.Schema.Metadata.t(),
           id: integer(),
           year_of_birth: String.t() | nil,
           zip_code: String.t() | nil,
@@ -69,6 +78,8 @@ defmodule Types.User do
         }
 
   @type accepted_term :: %{
+          __struct__: atom(),
+          __meta__: Ecto.Schema.Metadata.t(),
           id: integer(),
           site: :tv4play | :fotbollskanalen | :mtv | :mtv_uutiset,
           issue_date: Date.t(),
@@ -79,6 +90,8 @@ defmodule Types.User do
         }
 
   @type user_term :: %{
+          __struct__: atom(),
+          __meta__: Ecto.Schema.Metadata.t(),
           user_id: integer(),
           user: user() | Ecto.Association.NotLoaded.t(),
           term_id: integer(),
