@@ -21,5 +21,7 @@ defmodule Behaviours.SessionStore do
               {:ok, String.t()} | :error
 
   @callback session_ids_for_user(user_id :: String.t()) :: list()
-  @callback max_ttl(user_id :: String.t()) :: String.t() | nil
+
+  @callback max_ttl(user_id :: String.t()) ::
+              %Session{} | nil | {:error, any()}
 end
